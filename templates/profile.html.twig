@@ -1,0 +1,47 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+<div>
+  <div>
+    <form method="post" action="{{ path('app_logout') }}">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+  <nav>
+    {% if repositories is defined %}
+    <ul>
+      <h4>Public Repos</h4>
+      {% for repository in repositories %}
+      <li>
+        <a href="{{ repository.html_url }}">{{ repository.full_name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if followers is defined %}
+    <ul>
+      <h4>Followers</h4>
+      {% for follower in followers %}
+      <li>
+        <a href="{{ follower.html_url }}">
+          <img src="{{ follower.avatar_url }}" alt="{{ follower.login }}" />
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if stars is defined %}
+    <ul>
+      <h4>Stars</h4>
+      {% for star in stars %}
+      <li>
+        <a href="{{ star.html_url }}">{{ star.full_name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </nav>
+</div>
+{% endblock body %}

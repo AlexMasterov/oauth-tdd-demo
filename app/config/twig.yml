@@ -1,0 +1,9 @@
+twig:
+  paths:
+    '%kernel.project_dir%/templates': App
+
+  cache: '%kernel.cache_dir%/twig'
+
+  debug:            '%kernel.debug%'
+  auto_reload:      '%kernel.debug%'
+  strict_variables: '%kernel.debug%'

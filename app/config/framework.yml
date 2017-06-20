@@ -1,0 +1,9 @@
+framework:
+  secret: 'symfony'
+
+  templating:
+    engines: ['twig']
+
+  session:
+    handler_id: 'session.handler.native_file'
+    save_path: '/tmp'

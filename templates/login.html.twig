@@ -1,0 +1,11 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+<div>
+<form method="post" action="{{ path('app_login') }}">
+    <button type="submit">Login with Github</button>
+  </form>
+</div>
+{% endblock body %}

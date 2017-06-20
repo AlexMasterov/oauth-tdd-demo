@@ -1,0 +1,15 @@
+build/
+vendor/
+
+.git
+*.log
+*.cache
+
+composer.phar
+composer.lock
+phpunit.xml
+
+node_modules/
+package.json
+gulpfile.js
+yarn.lock

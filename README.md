@@ -1,4 +1,4 @@
-## Oauth Github Demo; TDD attempt
+## OAuth Github Demo; TDD attempt
 _Work in progress.._
 
 [![Build Status](https://travis-ci.org/AlexMasterov/oauth-tdd-demo.svg)](https://travis-ci.org/AlexMasterov/oauth-tdd-demo)

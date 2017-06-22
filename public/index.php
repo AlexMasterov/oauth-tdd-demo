@@ -2,8 +2,11 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../app/env.php';
+$rootDir = dirname(__DIR__);
+
+require "{$rootDir}/vendor/autoload.php";
+require "{$rootDir}/app/env.php";
+include_once "{$rootDir}/var/bootstrap.php.cache";
 
 $kernel = new AppKernel('prod', false);
 

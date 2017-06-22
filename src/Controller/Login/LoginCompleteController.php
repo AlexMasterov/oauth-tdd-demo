@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Oauth\Controller\Login;
 
+use League\OAuth2\Client\Token\AccessToken;
 use Oauth\Controller\Login\LoginView;
 use Oauth\Domain\Authorization\FetchTokenCommand;
 use Oauth\Infrastructure\{
     CommandBus\CommandBusInterface,
     Storage\StorageInterface
 };
-use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -29,7 +29,7 @@ final class LoginCompleteController
 
     public function get(Request $request): Response
     {
-        $code = $request->get('code');
+        $code = $request->query->get('code');
         $state = $this->authState();
 
         if (empty($code) || empty($state)) {

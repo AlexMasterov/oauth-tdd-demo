@@ -1,22 +1,29 @@
 app:
   path:     /
-  defaults: { _controller: 'Oauth\Controller\ProfileController::get' }
+  defaults: { _controller: Oauth\Controller\ProfileController::get }
 
 app_login:
   path:     /login
-  defaults: { _controller: 'Oauth\Controller\Login\LoginController::get' }
+  defaults: { _controller: Oauth\Controller\Login\LoginController::get }
   methods:  [GET]
 
 app_login_begin:
   path:     /login
-  defaults: { _controller: 'Oauth\Controller\Login\LoginBeginController::post' }
+  defaults: { _controller: Oauth\Controller\Login\LoginBeginController::post }
   methods:  [POST]
 
 app_login_complete:
   path:     /login/complete
-  defaults: { _controller: 'Oauth\Controller\Login\LoginCompleteController::get' }
+  defaults: { _controller: Oauth\Controller\Login\LoginCompleteController::get }
+  methods:  [GET]
 
 app_logout:
   path:     /logout
-  defaults: { _controller: 'Oauth\Controller\Logout\LogoutController::post' }
+  defaults: { _controller: Oauth\Controller\Logout\LogoutController::post }
   methods:  [POST]
+
+app_404:
+  path:     /{not_found}
+  defaults: { _controller: Oauth\Controller\ProfileController::get }
+  requirements:
+    not_found: '.*'

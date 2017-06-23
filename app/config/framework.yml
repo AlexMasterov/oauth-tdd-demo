@@ -1,8 +1,11 @@
 framework:
   secret: 'symfony'
 
-  assets: false
+  http_method_override: false
+  router:
+    strict_requirements: null
 
+  assets: false
   templating:
     engines: ['twig']
 

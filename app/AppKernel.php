@@ -11,12 +11,15 @@ final class AppKernel extends Kernel
 {
     use MicroKernelTrait;
 
-    public function registerBundles(): array
+    public function registerBundles(): iterable
     {
-        return [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-        ];
+        $bundles = require __DIR__ . '/bundles.php';
+
+        foreach ($bundles as $bundle => $env) {
+            if (isset($env['all'])) {
+                yield new $bundle();
+            }
+        }
     }
 
     public function getCacheDir(): string
@@ -34,25 +37,24 @@ final class AppKernel extends Kernel
         $routes->import(__DIR__ . '/config/routing.yml');
     }
 
-    protected function configureContainer(
-        ContainerBuilder $container,
-        LoaderInterface $loader
-    ): void {
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
+    {
         $this->injection($container);
         $this->configure($loader);
     }
 
     protected function injection(ContainerBuilder $container): void
     {
-        $injections = [
-            require __DIR__ . '/injection/autowire.php',
-            require __DIR__ . '/injection/commandbus.php',
-            require __DIR__ . '/injection/oauth.php',
-            require __DIR__ . '/injection/storage.php',
+        // injection/{config}.php
+        static $injections = [
+            'autowire',
+            'commandbus',
+            'oauth',
+            'storage',
         ];
 
         $inject = function ($injection) use ($container): void {
-            $injection($container);
+            (require __DIR__ . "/injection/{$injection}.php")($container);
         };
 
         array_map($inject, $injections);
@@ -60,7 +62,6 @@ final class AppKernel extends Kernel
 
     protected function configure(LoaderInterface $loader): void
     {
-        $loader->load(__DIR__ . '/config/framework.yml');
-        $loader->load(__DIR__ . '/config/twig.yml');
+        $loader->load(__DIR__ . '/config/{framework,twig}.yml', 'glob');
     }
 }

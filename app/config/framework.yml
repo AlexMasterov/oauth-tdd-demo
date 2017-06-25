@@ -3,7 +3,7 @@ framework:
 
   http_method_override: false
   router:
-    strict_requirements: null
+    strict_requirements: true
 
   assets: false
   templating:
